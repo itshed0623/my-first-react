@@ -6,10 +6,11 @@ export default function Student() {
     const [ product, setProduct ] = useState([]);
     const [ name, setName ] = useState('');
     const [price, setPrice] = useState('');
-    //variables for editing
+
+    //container ng mga ieedit na data
     const [ editID, seteditID ] = useState('');
     const [ editname, seteditName ] = useState('');
-    const [ editprice, seteditPrice ] = useState('');
+    const [editprice, seteditPrice] = useState('');
     const [ isModalOpen, setisModalOpen ] = useState(false);
     const product_url = 'http://localhost:8080/api/product';
 
@@ -51,41 +52,30 @@ export default function Student() {
         e.preventDefault();
         const response = await fetch(`${product_url}/${editID}`, {
             method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json'
-            },
+            headers: { 'Content-Type': 'application/json'},
             body: JSON.stringify({
                 name: editname,
-                price: editprice
+                price: editprice,
             })
         })
 
         const data = await response.json();
-
         setProduct((prev) => 
            prev.map((p) => (p.id === Number(editID) ? data : p))
         )
-
-        setisModalOpen(false);
+        
+        setisModalOpen(false)
     }
 
     async function handleDelete(id) {
-        try {
-            const response = await fetch(`${product_url}/${id}`, {
-                method: 'DELETE'
-            })
-    
-            const deletedID = response.json();
-    
-            setProduct((prev) => {
-                return prev.filter((p)=> (p.id !== Number(id)))
-            })
-            
-        } catch (error) {
-            console.log(error);
-        }
-    }
+        await fetch(`${product_url}/${id}`, {
+            method: 'DELETE'
+        })
 
+        setProduct((prev) => {
+            return prev.filter((p)=> (p.id !== Number(id)))
+        })
+    }
     function openEditModal(product) {
         setisModalOpen(true);
         seteditID(product.id);
@@ -156,7 +146,7 @@ export default function Student() {
                                         className="form-control"
                                             id="editName"
                                             value={editname}
-                                            onChange={(e) => seteditName(e.target.value)}
+                                            onChange={(e) => seteditName(e.target.value) }
                                         required
                                         
                                         />
@@ -169,8 +159,8 @@ export default function Student() {
                                         type="number"
                                         className="form-control"
                                         id="editPrice"
-                                        value={editprice}
-                                            onChange={(e) => seteditPrice(e.target.value)}
+                                            value={editprice}
+                                            onChange={(e) => seteditPrice(e.target.value) }
                                         required
                                     />
                                 </div>

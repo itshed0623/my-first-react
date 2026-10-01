@@ -7,6 +7,7 @@ import Display from './Display.jsx';
 import Student from './Student.jsx';
 import Admin from './Admin.jsx';
 import Backend from './Backend.jsx'
+import Product from './Product.jsx'
 import { Routes, Route, Navigate } from 'react-router-dom';
 
 import { auth, googleProvider, db } from './firebase';
@@ -84,7 +85,12 @@ export default function App() {
   };
 
 ``
-  if (loading) return <h2>Loading Application State...</h2>;
+  if (loading) return <div id="loading-screen" className="bg-dark text-white d-flex flex-column justify-content-center align-items-center">
+    <div className="spinner-border text-primary mb-3" style={{ width: '3rem', height: '3rem' }} role="status">
+      <span className="visually-hidden">Loading...</span>
+    </div>
+    <h5 className="fw-semibold">Loading, please wait...</h5>
+  </div>;
 
 
 
@@ -114,7 +120,7 @@ export default function App() {
             {role === 'student' ? 
               <div>
                 <Header onLogout={handleLogout} />
-                <Student />
+                <Product />
               </div>
 
               :

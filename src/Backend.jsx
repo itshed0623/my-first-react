@@ -56,7 +56,7 @@ export default function Backend() {
             <table>
                 <tr>
                     <td>Name</td>
-                    <td>Price</td>
+                    <td>Pricdvsde</td>
                 </tr>
                 {
                     product.map((products) => (
