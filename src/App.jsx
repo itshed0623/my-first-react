@@ -99,21 +99,26 @@ export default function App() {
         <Route path='/login' element={!user ? <Login onLogin={handleLogin}/> : <Navigate to='/' replace/>}></Route>
         
         <Route path='/' element={
-          user ?
-            <div>
-              <Header onLogout={handleLogout} />
-              {role === 'student' && (
+          // user ?
+          //   <div>
+          //     <Header onLogout={handleLogout} />
+          //     {role === 'student' && (
                 
-                // <h1>Student</h1>
-                <Navigate to='/student' replace />
-              )}
+          //       // <h1>Student</h1>
+          //       <Navigate to='/student' replace />
+          //     )}
 
-              {role === 'admin' && (
-                <Navigate to='/admin' replace />
-              )}
-            </div>
-          :
-            <Navigate to='/login' replace />}></Route>
+          //     {role === 'admin' && (
+          //       <Navigate to='/admin' replace />
+          //     )}
+          //   </div>
+          // :
+        // <Navigate to='/login' replace/>
+        <div>
+                <Header onLogout={handleLogout} />
+                <Display />
+              </div>
+        }></Route>
         
         <Route path='/student' element={
           <>
